@@ -54,7 +54,7 @@ const Box = styled.div`
 ```
 
 ### theme
-- theme를 실행할려면 index.js에서 ThemeProbiders를 호출 해야 한다.
+- theme를 실행할려면 index.js에서 ThemeProvider 호출 해야 한다.
 
 Index.js
 ```javascript
