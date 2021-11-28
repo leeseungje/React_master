@@ -185,4 +185,34 @@ export async function fetchCoins() {
     response.json(),
   )
 }
+
+export async function fetchCoinHistory(coinId: string) {
+  const endDate = Math.floor(Date.now() / 1000)
+  const startDate = endDate - 60 * 60 * 24 * 7 * 2
+  return fetch(
+    `${BASE_URL}/coins/${coinId}/ohlcv/historical?start=${startDate}&end=${endDate}`,
+  ).then((response) => response.json())
+}
+```
+
+`Charts.tsx`
+
+```javascript
+interface IHistorical {
+  time_open: string
+  time_close: string
+  open: number
+  high: number
+  low: number
+  close: number
+  volume: number
+  market_cap: number
+}
+const { isLoading, data: dataSource } = useQuery<IHistorical[]>(
+    ['ohlcv', coinId],
+    () => fetchCoinHistory(coinId),
+    {
+      refetchInterval: 10000,
+    },
+  )
 ```
