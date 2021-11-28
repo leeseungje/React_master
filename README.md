@@ -168,3 +168,21 @@ ReactDOM.render(
 ## useParams
 
 브라우저 url의 파라미터 값을 전달 받는다.
+
+## useRouteMatch
+
+유저가 특정한 url에 있는지 여부 파악
+
+## react Query
+
+각 컴포넌트에서 데이터를 호출 했다면 api.ts에서 하나로 묶어서 필요할때 부를수 있는 방식
+데이터를 유지하기 때문에 속도가 빠르다.
+`api.ts`
+
+```javascript
+export async function fetchCoins() {
+  return fetch('https://api.coinpaprika.com/v1/coins').then((response) =>
+    response.json(),
+  )
+}
+```
