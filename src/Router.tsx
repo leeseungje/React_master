@@ -2,7 +2,9 @@ import { BrowserRouter, Switch, Route } from 'react-router-dom'
 import Coin from './routes/Coin'
 import Coins from './routes/Coins'
 
-function Router() {
+interface IRouterProps {}
+
+function Router({}: IRouterProps) {
   // coinId가 변수 값을 받는다
   return (
     <BrowserRouter>

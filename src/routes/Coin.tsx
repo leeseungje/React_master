@@ -39,6 +39,9 @@ const OverviewItem = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
+  span {
+    color: ${(props) => props.theme.innerColor};
+  }
 
   span:first-child {
     font-size: 10px;
@@ -49,6 +52,7 @@ const OverviewItem = styled.div`
 `
 const Description = styled.p`
   margin: 20px 0;
+  color: ${(props) => props.theme.innerColor};
 `
 
 const Tabs = styled.div`
@@ -68,7 +72,7 @@ const Tab = styled.span<{ isActive: boolean }>`
   a {
     display: block;
     color: ${(props) =>
-      props.isActive ? props.theme.accentColor : props.theme.textColor};
+      props.isActive ? props.theme.accentColor : props.theme.innerColor};
   }
 `
 
@@ -138,7 +142,9 @@ interface PriceDate {
   }
 }
 
-function Coin() {
+interface ICoinProps {}
+
+function Coin({}: ICoinProps) {
   const { coinId } = useParams<RouteParams>()
   const { state } = useLocation<RouterState>()
   const priceMatch = useRouteMatch(`/${coinId}/price`)

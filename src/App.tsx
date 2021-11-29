@@ -1,6 +1,5 @@
 import { createGlobalStyle } from 'styled-components'
-import Router from './Router'
-import { ReactQueryDevtools } from 'react-query/devtools'
+import TodoList from './ToDoList'
 
 const GlobalStyle = createGlobalStyle`
 @import url('https://fonts.googleapis.com/css2?family=Source+Sans+Pro:wght@300;400&display=swap');
@@ -57,7 +56,7 @@ table {
 body {
   font-family: 'Source Sans Pro', sans-serif;
   background-color:${(props) => props.theme.bgColor};
-  color:${(props) => props.theme.textColor}
+  color: white;
 }
 a {
   text-decoration:none;
@@ -67,8 +66,7 @@ function App() {
   return (
     <>
       <GlobalStyle />
-      <Router />
-      <ReactQueryDevtools initialIsOpen={true} />
+      <TodoList />
     </>
   )
 }
