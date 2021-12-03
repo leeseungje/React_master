@@ -518,3 +518,65 @@ const Tello = () => {
   );
 };
 ```
+
+## mutation, non-mutation
+
+state값을 변형시키냐 안시키냐의 차이
+
+```javascript
+x = ["a", "b", "c", "d"];
+x.splice(0, 1); // "b","c","d" 이게 mutation
+
+const name = "leeseungje";
+name.toUpperCase(); // LEESEUNGJE
+name; // leeseungje 이게 non-mutation
+```
+
+## React Memo
+
+`react memo`는 react.js한테 제발 이 components는 prop이 변하지 않는 한 렌더링 하지 말라고 말하는 역할
+
+```javascript
+import React from "react";
+
+const DragabbleCard = () => {
+  return <></>;
+};
+export default React.memo(DragabbleCard); // 이렇게 하면 prop이 전달되지 않는한 렌더링 되지 않는다.
+```
+
+## Object.keys, Object.values
+
+recoil 에서 value값이 오브젝트로 담겨져 있을때 `loop`하는 방식
+
+```javascript
+const toDos = {
+  x: ["a", "b"],
+  z: ["n", "t"],
+};
+Object.keys(toDos); // ["x", "y"] 프로퍼티만 가져옴
+Object.values(toDos); // [Array(2), Array(2)]
+```
+
+interface value값이 오브젝트로 담겨져 있을때 더 명확히 하기 위해 추가적인 interface가 들어간다.
+
+```javascript
+interface IToDoState {
+  [key: string]: string[]; // string으로써의 프로퍼티와, string array로 이루어져 있다.
+}
+
+export const toDoState =
+  atom <
+  IToDoState >
+  {
+    key: "toDo",
+    default: {
+      to_do: ["a", "b", "c", "d", "e", "f"],
+      doing: [],
+      done: [],
+      test: [],
+      test12: [],
+      test4: [],
+    },
+  };
+```

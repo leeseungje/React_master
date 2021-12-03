@@ -21,3 +21,9 @@
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
+src/components/Back/Router.tsx
+src/components/Back/routes.back/Chart.tsx
+src/components/Back/routes.back/Coin.tsx
+src/components/Back/routes.back/Coins.tsx
+src/components/Back/routes.back/Price.tsx
+src/components/DragDrop/DragDrop.tsx

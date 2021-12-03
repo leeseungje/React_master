@@ -1,5 +1,5 @@
-import { createGlobalStyle } from 'styled-components'
-import Tello from './components/Tello/Tello'
+import { createGlobalStyle } from "styled-components";
+import DragDrop from "./components/DragDrop/DragDrop";
 
 const GlobalStyle = createGlobalStyle`
 @import url('https://fonts.googleapis.com/css2?family=Source+Sans+Pro:wght@300;400&display=swap');
@@ -33,7 +33,10 @@ footer, header, hgroup, main, menu, nav, section {
     display: none;
 }
 body {
-  line-height: 1;
+  line-height: 1.2;
+  font-weight: 300;
+  font-family: "source sans prop", sans-serif;
+  color: black;
 }
 menu, ol, ul {
   list-style: none;
@@ -56,19 +59,18 @@ table {
 body {
   font-family: 'Source Sans Pro', sans-serif;
   background-color:${(props) => props.theme.bgColor};
-  color: white;
 }
 a {
   text-decoration:none;
   color: inherit;
-}`
+}`;
 function App() {
   return (
     <>
       <GlobalStyle />
-      <Tello />
+      <DragDrop />
     </>
-  )
+  );
 }
 
-export default App
+export default App;
