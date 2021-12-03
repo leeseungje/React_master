@@ -48,15 +48,15 @@ const rotationA = keyframes`
     transform: rotate(0deg);
     border-radius: 0px;
   }
-`
+`;
 const Box = styled.div`
   height: 200px;
   width: 200px;
   background-color: tomato;
   animation: ${rotationA} 1s linear infinite;
-`
+`;
 
-;<Box />
+<Box />;
 ```
 
 ### theme
@@ -86,7 +86,7 @@ App.js
 // theme를 props로 부를 수 있다.
 const Box = styled.div`
   background-color: ${(props) => props.theme.textColor};
-`
+`;
 ```
 
 ## @types?
@@ -124,19 +124,19 @@ declare module "styled-components" {
 - `src/theme.ts`
 
 ```javascript
-import { DefaultTheme } from 'styled-components'
+import { DefaultTheme } from "styled-components";
 
 export const lightTheme: DefaultTheme = {
-  bgColor: 'white', // styled.d.ts 에서 쓰였던 기본적인 테마 적용
-  textColor: 'black',
-  btnColor: 'tomato',
-}
+  bgColor: "white", // styled.d.ts 에서 쓰였던 기본적인 테마 적용
+  textColor: "black",
+  btnColor: "tomato",
+};
 
 export const darkTheme: DefaultTheme = {
-  bgColor: 'black',
-  textColor: 'white',
-  btnColor: 'teal',
-}
+  bgColor: "black",
+  textColor: "white",
+  btnColor: "teal",
+};
 ```
 
 이렇게 설정하면 index에서 `ThemeProvider` 호출이 가능하다.
@@ -144,12 +144,12 @@ export const darkTheme: DefaultTheme = {
 -`/src/index.tsx`
 
 ```javascript
-import React from 'react'
-import ReactDOM from 'react-dom'
-import './index.css'
-import App from './App'
-import { ThemeProvider } from 'styled-components'
-import { darkTheme, lightTheme } from './theme' // theme 호출
+import React from "react";
+import ReactDOM from "react-dom";
+import "./index.css";
+import App from "./App";
+import { ThemeProvider } from "styled-components";
+import { darkTheme, lightTheme } from "./theme"; // theme 호출
 
 ReactDOM.render(
   <React.StrictMode>
@@ -157,8 +157,8 @@ ReactDOM.render(
       <App />
     </ThemeProvider>
   </React.StrictMode>,
-  document.getElementById('root'),
-)
+  document.getElementById("root")
+);
 ```
 
 ## form 이벤트
@@ -182,17 +182,17 @@ ReactDOM.render(
 
 ```javascript
 export async function fetchCoins() {
-  return fetch('https://api.coinpaprika.com/v1/coins').then((response) =>
-    response.json(),
-  )
+  return fetch("https://api.coinpaprika.com/v1/coins").then((response) =>
+    response.json()
+  );
 }
 
 export async function fetchCoinHistory(coinId: string) {
-  const endDate = Math.floor(Date.now() / 1000)
-  const startDate = endDate - 60 * 60 * 24 * 7 * 2
+  const endDate = Math.floor(Date.now() / 1000);
+  const startDate = endDate - 60 * 60 * 24 * 7 * 2;
   return fetch(
-    `${BASE_URL}/coins/${coinId}/ohlcv/historical?start=${startDate}&end=${endDate}`,
-  ).then((response) => response.json())
+    `${BASE_URL}/coins/${coinId}/ohlcv/historical?start=${startDate}&end=${endDate}`
+  ).then((response) => response.json());
 }
 ```
 
@@ -227,24 +227,24 @@ Recoil은 버블이라 부르지 않고 `Atom`이라고 부른다
 - `index.tsx`
 
 ```javascript
-import { RecoilRoot } from 'recoil' // RecoilRoot 추가
-;<RecoilRoot>
+import { RecoilRoot } from "recoil"; // RecoilRoot 추가
+<RecoilRoot>
   <QueryClientProvider client={queryClient}>
     <App />
   </QueryClientProvider>
-</RecoilRoot>
+</RecoilRoot>;
 ```
 
 - `src/routes/atom.ts` 생성
 
 ```javascript
-import { atom } from 'recoil'
+import { atom } from "recoil";
 
 export const isDarkAtom = atom({
   // atom을 추가 하면 반드시 key 값과 default값이 필요 하다.
-  key: 'isDark', // 이름
+  key: "isDark", // 이름
   default: false, // value 값을 변경 시켜주는 역할
-})
+});
 ```
 
 ### useRecoilValue
@@ -252,9 +252,9 @@ export const isDarkAtom = atom({
 atom의 value를 갑지하기 위해서 useRecolValue hook을 사용
 
 ```javascript
-import { useRecoilValue } from './atom'
+import { useRecoilValue } from "./atom";
 
-const isDark = useRecoilValue(isDarkAtom) // false
+const isDark = useRecoilValue(isDarkAtom); // false
 ```
 
 ### useSetRecoilState
@@ -276,20 +276,20 @@ const setterFn = useSetRecoilState(isDarkAtom)
 큰 폼이 있을경우 매우 유용한 기능
 
 ```javascript
-import React, { useState } from 'react'
+import React, { useState } from "react";
 
 function TodoList() {
-  const [toDo, setToDo] = useState('')
+  const [toDo, setToDo] = useState("");
   const onChange = (event: React.FormEvent<HTMLInputElement>) => {
     const {
       currentTarget: { value },
-    } = event
-    setToDo(value)
-  }
+    } = event;
+    setToDo(value);
+  };
   const onSubmit = (event: React.FormEvent<HTMLFormElement>) => {
-    event.preventDefault()
-    console.log(toDo)
-  }
+    event.preventDefault();
+    console.log(toDo);
+  };
   return (
     <div>
       <form onSubmit={onSubmit}>
@@ -297,10 +297,10 @@ function TodoList() {
         <button>Add</button>
       </form>
     </div>
-  )
+  );
 }
 
-export default TodoList
+export default TodoList;
 ```
 
 - `useForm` 이용하면
@@ -430,3 +430,91 @@ export default TodoList
 3. `handleSubmit` onSubmit에서 값을 제대로 받았는지 체크해 준다.
 4. `formState: { errors }` errors에 formState값을 할당 받고 실시간으로 에러 체크를 해준다.
 5. `setError`: 에러가 있는 부분을 실시간으로 체크해 준다.
+
+## Enum
+
+제품의 특정 코드가 정확이 어떤 언어를 가리키는지 또는 일일이 외우기 쉽지 않을때
+`enum`을 사용 한다. 리터럴의 타입과 값에 이름을 붙여서 코드의 가독성을 크게 높일 수 있다.
+
+- `atom.ts`
+
+```javascript
+export enum Categories { // 해당방식으로 코드를 저장한 후
+  'TO_DO' = 'TO_DO',
+  'DOING' = 'DOING',
+  'DONE' = 'DONE',
+}
+
+export const categoryState = atom<Categories>({
+  key: 'category',
+  default: Categories.TO_DO, // 이런식으로 호출이 가능하다.
+})
+```
+
+1. 'TO_DO' = 'TO_DO', 이런식으로 저장하지 않으면 숫자로 인식이 되어 0, 1, 2 이런식으로 호출이 된다.
+2. enum을 잘 이용하면 유용하게 개발을 할 수 있다.
+
+## selector(option)
+
+atoms나 다른 selectors를 입력으로 받아들이는 순수 함수.
+상위의 atoms 또는 selectors가 업데이트 되면 하위의 selector 함수도 다시 실행된다.
+컴포넌트의 관점에서 보면 selectors와 atoms는 동일한 인터페이스를 가지므로 서로 재체할 수 있다.
+
+```javascript
+export const minuteState = atom({
+  key: "minutes",
+  default: 0, // 3. minutes 값으로 변경
+});
+
+export const hourSelector =
+  selector <
+  number >
+  {
+    // connecting
+    key: "hour",
+    get: ({ get }) => {
+      const minutes = get(minuteState);
+      return minutes / 60;
+    },
+    set: ({ set }, newValue) => {
+      // 1. newValue에 hours값이 전달
+      const minutes = Number(newValue) * 60;
+      set(minuteState, minutes); // 2. minuteState에 value = minutes 값이 전달
+    },
+  };
+```
+
+1. `get` 속성은 계산될 함수. 전달되는 get인자를 통해 atoms와 다른 selectors에 접근 할 수 있다.
+2. selectors는 `useRecoilValue()`를 통해 읽을 수 있다.
+3. `set` 속성은 함수를 통해 여러개의 stom정보를 동시에 수정할 수 있다. 필수 옵션은 아니다.
+4. 복수개의 stom정보를 한번에 수정할 수 있다.
+
+```javascript
+const Tello = () => {
+  const [minutes, setMinutes] = useRecoilState(minuteState);
+  const [hours, setHours] = useRecoilState(hourSelector); // set에 hours가 전달 된다.
+  const onMinutesChange = (event: React.FormEvent<HTMLInputElement>) => {
+    setMinutes(+event.currentTarget.value);
+  };
+  const onHoursChange = (event: React.FormEvent<HTMLInputElement>) => {
+    setHours(+event.currentTarget.value);
+  };
+
+  return (
+    <div>
+      <input
+        value={minutes} // minutes값 리턴
+        onChange={onMinutesChange}
+        type="number"
+        placeholder="Minites"
+      />
+      <input
+        onChange={onHoursChange}
+        value={hours}
+        type="number"
+        placeholder="Hour"
+      />
+    </div>
+  );
+};
+```

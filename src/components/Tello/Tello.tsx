@@ -1,13 +1,16 @@
-import React from 'react'
-import { useRecoilState, useRecoilValue } from 'recoil'
-import { hourSelector, minuteState } from './atom'
+import React from "react";
+import { useRecoilState } from "recoil";
+import { hourSelector, minuteState } from "./atom";
 
 const Tello = () => {
-  const [minutes, setMinutes] = useRecoilState(minuteState)
-  const hours = useRecoilValue(hourSelector)
+  const [minutes, setMinutes] = useRecoilState(minuteState);
+  const [hours, setHours] = useRecoilState(hourSelector);
   const onMinutesChange = (event: React.FormEvent<HTMLInputElement>) => {
-    setMinutes(+event.currentTarget.value)
-  }
+    setMinutes(+event.currentTarget.value);
+  };
+  const onHoursChange = (event: React.FormEvent<HTMLInputElement>) => {
+    setHours(+event.currentTarget.value);
+  };
 
   return (
     <div>
@@ -17,9 +20,14 @@ const Tello = () => {
         type="number"
         placeholder="Minites"
       />
-      <input value={hours} type="number" placeholder="Hour" />
+      <input
+        onChange={onHoursChange}
+        value={hours}
+        type="number"
+        placeholder="Hour"
+      />
     </div>
-  )
-}
+  );
+};
 
-export default Tello
+export default Tello;
