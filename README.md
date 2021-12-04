@@ -586,7 +586,7 @@ export const toDoState =
 ReactJS 애니메이션 라이브러리
 <code>
 yarn add framer-motion
-<code>
+</code>
 해당 패키지를 설치 하고
 
 ```javascript
