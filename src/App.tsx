@@ -1,5 +1,5 @@
-import { createGlobalStyle } from "styled-components";
-import DragDrop from "./components/DragDrop/DragDrop";
+import { createGlobalStyle } from 'styled-components'
+import Grid from './components/Framer/Grid'
 
 const GlobalStyle = createGlobalStyle`
 @import url('https://fonts.googleapis.com/css2?family=Source+Sans+Pro:wght@300;400&display=swap');
@@ -63,14 +63,14 @@ body {
 a {
   text-decoration:none;
   color: inherit;
-}`;
+}`
 function App() {
   return (
     <>
       <GlobalStyle />
-      <DragDrop />
+      <Grid />
     </>
-  );
+  )
 }
 
-export default App;
+export default App

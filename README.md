@@ -48,15 +48,15 @@ const rotationA = keyframes`
     transform: rotate(0deg);
     border-radius: 0px;
   }
-`;
+`
 const Box = styled.div`
   height: 200px;
   width: 200px;
   background-color: tomato;
   animation: ${rotationA} 1s linear infinite;
-`;
+`
 
-<Box />;
+;<Box />
 ```
 
 ### theme
@@ -86,7 +86,7 @@ App.js
 // theme를 props로 부를 수 있다.
 const Box = styled.div`
   background-color: ${(props) => props.theme.textColor};
-`;
+`
 ```
 
 ## @types?
@@ -124,19 +124,19 @@ declare module "styled-components" {
 - `src/theme.ts`
 
 ```javascript
-import { DefaultTheme } from "styled-components";
+import { DefaultTheme } from 'styled-components'
 
 export const lightTheme: DefaultTheme = {
-  bgColor: "white", // styled.d.ts 에서 쓰였던 기본적인 테마 적용
-  textColor: "black",
-  btnColor: "tomato",
-};
+  bgColor: 'white', // styled.d.ts 에서 쓰였던 기본적인 테마 적용
+  textColor: 'black',
+  btnColor: 'tomato',
+}
 
 export const darkTheme: DefaultTheme = {
-  bgColor: "black",
-  textColor: "white",
-  btnColor: "teal",
-};
+  bgColor: 'black',
+  textColor: 'white',
+  btnColor: 'teal',
+}
 ```
 
 이렇게 설정하면 index에서 `ThemeProvider` 호출이 가능하다.
@@ -144,12 +144,12 @@ export const darkTheme: DefaultTheme = {
 -`/src/index.tsx`
 
 ```javascript
-import React from "react";
-import ReactDOM from "react-dom";
-import "./index.css";
-import App from "./App";
-import { ThemeProvider } from "styled-components";
-import { darkTheme, lightTheme } from "./theme"; // theme 호출
+import React from 'react'
+import ReactDOM from 'react-dom'
+import './index.css'
+import App from './App'
+import { ThemeProvider } from 'styled-components'
+import { darkTheme, lightTheme } from './theme' // theme 호출
 
 ReactDOM.render(
   <React.StrictMode>
@@ -157,8 +157,8 @@ ReactDOM.render(
       <App />
     </ThemeProvider>
   </React.StrictMode>,
-  document.getElementById("root")
-);
+  document.getElementById('root'),
+)
 ```
 
 ## form 이벤트
@@ -182,17 +182,17 @@ ReactDOM.render(
 
 ```javascript
 export async function fetchCoins() {
-  return fetch("https://api.coinpaprika.com/v1/coins").then((response) =>
-    response.json()
-  );
+  return fetch('https://api.coinpaprika.com/v1/coins').then((response) =>
+    response.json(),
+  )
 }
 
 export async function fetchCoinHistory(coinId: string) {
-  const endDate = Math.floor(Date.now() / 1000);
-  const startDate = endDate - 60 * 60 * 24 * 7 * 2;
+  const endDate = Math.floor(Date.now() / 1000)
+  const startDate = endDate - 60 * 60 * 24 * 7 * 2
   return fetch(
-    `${BASE_URL}/coins/${coinId}/ohlcv/historical?start=${startDate}&end=${endDate}`
-  ).then((response) => response.json());
+    `${BASE_URL}/coins/${coinId}/ohlcv/historical?start=${startDate}&end=${endDate}`,
+  ).then((response) => response.json())
 }
 ```
 
@@ -227,24 +227,24 @@ Recoil은 버블이라 부르지 않고 `Atom`이라고 부른다
 - `index.tsx`
 
 ```javascript
-import { RecoilRoot } from "recoil"; // RecoilRoot 추가
-<RecoilRoot>
+import { RecoilRoot } from 'recoil' // RecoilRoot 추가
+;<RecoilRoot>
   <QueryClientProvider client={queryClient}>
     <App />
   </QueryClientProvider>
-</RecoilRoot>;
+</RecoilRoot>
 ```
 
 - `src/routes/atom.ts` 생성
 
 ```javascript
-import { atom } from "recoil";
+import { atom } from 'recoil'
 
 export const isDarkAtom = atom({
   // atom을 추가 하면 반드시 key 값과 default값이 필요 하다.
-  key: "isDark", // 이름
+  key: 'isDark', // 이름
   default: false, // value 값을 변경 시켜주는 역할
-});
+})
 ```
 
 ### useRecoilValue
@@ -252,9 +252,9 @@ export const isDarkAtom = atom({
 atom의 value를 갑지하기 위해서 useRecolValue hook을 사용
 
 ```javascript
-import { useRecoilValue } from "./atom";
+import { useRecoilValue } from './atom'
 
-const isDark = useRecoilValue(isDarkAtom); // false
+const isDark = useRecoilValue(isDarkAtom) // false
 ```
 
 ### useSetRecoilState
@@ -276,20 +276,20 @@ const setterFn = useSetRecoilState(isDarkAtom)
 큰 폼이 있을경우 매우 유용한 기능
 
 ```javascript
-import React, { useState } from "react";
+import React, { useState } from 'react'
 
 function TodoList() {
-  const [toDo, setToDo] = useState("");
+  const [toDo, setToDo] = useState('')
   const onChange = (event: React.FormEvent<HTMLInputElement>) => {
     const {
       currentTarget: { value },
-    } = event;
-    setToDo(value);
-  };
+    } = event
+    setToDo(value)
+  }
   const onSubmit = (event: React.FormEvent<HTMLFormElement>) => {
-    event.preventDefault();
-    console.log(toDo);
-  };
+    event.preventDefault()
+    console.log(toDo)
+  }
   return (
     <div>
       <form onSubmit={onSubmit}>
@@ -297,10 +297,10 @@ function TodoList() {
         <button>Add</button>
       </form>
     </div>
-  );
+  )
 }
 
-export default TodoList;
+export default TodoList
 ```
 
 - `useForm` 이용하면
@@ -462,26 +462,26 @@ atoms나 다른 selectors를 입력으로 받아들이는 순수 함수.
 
 ```javascript
 export const minuteState = atom({
-  key: "minutes",
+  key: 'minutes',
   default: 0, // 3. minutes 값으로 변경
-});
+})
 
 export const hourSelector =
   selector <
   number >
   {
     // connecting
-    key: "hour",
+    key: 'hour',
     get: ({ get }) => {
-      const minutes = get(minuteState);
-      return minutes / 60;
+      const minutes = get(minuteState)
+      return minutes / 60
     },
     set: ({ set }, newValue) => {
       // 1. newValue에 hours값이 전달
-      const minutes = Number(newValue) * 60;
-      set(minuteState, minutes); // 2. minuteState에 value = minutes 값이 전달
+      const minutes = Number(newValue) * 60
+      set(minuteState, minutes) // 2. minuteState에 value = minutes 값이 전달
     },
-  };
+  }
 ```
 
 1. `get` 속성은 계산될 함수. 전달되는 get인자를 통해 atoms와 다른 selectors에 접근 할 수 있다.
@@ -491,14 +491,14 @@ export const hourSelector =
 
 ```javascript
 const Tello = () => {
-  const [minutes, setMinutes] = useRecoilState(minuteState);
-  const [hours, setHours] = useRecoilState(hourSelector); // set에 hours가 전달 된다.
+  const [minutes, setMinutes] = useRecoilState(minuteState)
+  const [hours, setHours] = useRecoilState(hourSelector) // set에 hours가 전달 된다.
   const onMinutesChange = (event: React.FormEvent<HTMLInputElement>) => {
-    setMinutes(+event.currentTarget.value);
-  };
+    setMinutes(+event.currentTarget.value)
+  }
   const onHoursChange = (event: React.FormEvent<HTMLInputElement>) => {
-    setHours(+event.currentTarget.value);
-  };
+    setHours(+event.currentTarget.value)
+  }
 
   return (
     <div>
@@ -515,8 +515,8 @@ const Tello = () => {
         placeholder="Hour"
       />
     </div>
-  );
-};
+  )
+}
 ```
 
 ## mutation, non-mutation
@@ -524,12 +524,12 @@ const Tello = () => {
 state값을 변형시키냐 안시키냐의 차이
 
 ```javascript
-x = ["a", "b", "c", "d"];
-x.splice(0, 1); // "b","c","d" 이게 mutation
+x = ['a', 'b', 'c', 'd']
+x.splice(0, 1) // "b","c","d" 이게 mutation
 
-const name = "leeseungje";
-name.toUpperCase(); // LEESEUNGJE
-name; // leeseungje 이게 non-mutation
+const name = 'leeseungje'
+name.toUpperCase() // LEESEUNGJE
+name // leeseungje 이게 non-mutation
 ```
 
 ## React Memo
@@ -537,12 +537,12 @@ name; // leeseungje 이게 non-mutation
 `react memo`는 react.js한테 제발 이 components는 prop이 변하지 않는 한 렌더링 하지 말라고 말하는 역할
 
 ```javascript
-import React from "react";
+import React from 'react'
 
 const DragabbleCard = () => {
-  return <></>;
-};
-export default React.memo(DragabbleCard); // 이렇게 하면 prop이 전달되지 않는한 렌더링 되지 않는다.
+  return <></>
+}
+export default React.memo(DragabbleCard) // 이렇게 하면 prop이 전달되지 않는한 렌더링 되지 않는다.
 ```
 
 ## Object.keys, Object.values
@@ -551,11 +551,11 @@ recoil 에서 value값이 오브젝트로 담겨져 있을때 `loop`하는 방�
 
 ```javascript
 const toDos = {
-  x: ["a", "b"],
-  z: ["n", "t"],
-};
-Object.keys(toDos); // ["x", "y"] 프로퍼티만 가져옴
-Object.values(toDos); // [Array(2), Array(2)]
+  x: ['a', 'b'],
+  z: ['n', 't'],
+}
+Object.keys(toDos) // ["x", "y"] 프로퍼티만 가져옴
+Object.values(toDos) // [Array(2), Array(2)]
 ```
 
 interface value값이 오브젝트로 담겨져 있을때 더 명확히 하기 위해 추가적인 interface가 들어간다.
@@ -569,14 +569,171 @@ export const toDoState =
   atom <
   IToDoState >
   {
-    key: "toDo",
+    key: 'toDo',
     default: {
-      to_do: ["a", "b", "c", "d", "e", "f"],
+      to_do: ['a', 'b', 'c', 'd', 'e', 'f'],
       doing: [],
       done: [],
       test: [],
       test12: [],
       test4: [],
     },
-  };
+  }
+```
+
+## Framer Motion
+
+ReactJS 애니메이션 라이브러리
+<code>
+yarn add framer-motion
+<code>
+해당 패키지를 설치 하고
+
+```javascript
+import { motion } from 'framer-motion'
+const Box = () => {
+  return (
+    <Wrapper>
+      {/* 해당 프레임웍을 쓸려면 motion.div 처럼 불러야 한다. */}
+      <motion.div></motion.div>
+    </Wrapper>
+  )
+}
+```
+
+이럴경우 오류가 나는 경우가 있는데
+create-react-app 버전과 framer-motion 다르면 에러가 뜬다.
+그럴경우는 `craco.config.js`를 추가 해야 하는데
+[설치방법](https://github.com/gsoft-inc/craco/blob/master/packages/craco/README.md#installation) 해당방식으로 설치후
+
+- 최상단 폴더에 `craco.config.js`생성 후
+
+```javascript
+module.exports = {
+  webpack: {
+    configure: {
+      module: {
+        rules: [
+          {
+            type: 'javascript/auto',
+            test: /\.mjs$/,
+            include: /node_modules/,
+          },
+        ],
+      },
+    },
+  },
+}
+```
+
+해당 코드를 추가 한 후 실행하면 오류가 해결 된다.
+
+- `components/Framer/Box.tsx`
+
+```javascript
+// styled-component에 styled(motion.div)를 불러서 사용 가능 하다.
+const StyledBox = styled(motion.div)`
+  width: 200px;
+  height: 200px;
+  background-color: white;
+  border-radius: 10px;
+  box-shadow: 0 2px 3px rgba(0, 0, 0, 0.1), 0 10px 20px rgba(0, 0, 0, 0.06);
+`
+
+<StyledBox
+  transition={{ type: 'spring', damping: 5 }} // 애니메이션 행동
+  initial={{ scale: 0 }} // 초기 값
+  animate={{ scale: 1, rotateZ: 360 }} // 움직이는 값
+></StyledBox>
+```
+
+- JSX에 직접적으로 넣는 방식이 있는 방면 `variants` 방식이 있다.
+
+- `components/Framer/Variants.tsx`
+
+```javascript
+const myVars = {
+  // 변수에 start와 end 포인트 움직임을 넣는다.
+  start: { scale: 0 },
+  end: { scale: 1, rotateZ: 360, transition: { type: 'spring', damping: 5 } },
+}
+const Variants = () => {
+  return (
+    <Wrapper>
+      {/* 변수코드를 부르면 훨씬 코드가 간결해 진다. */}
+      <StyledBox variants={myVars} initial="start" animate="end"></StyledBox>
+    </Wrapper>
+  )
+}
+```
+
+- Click, Hover `components/Framer/Gestures.tsx`
+
+```javascript
+const boxVariants = {
+  hover: {
+    scale: 1.5,
+    rotate: 90,
+  },
+  click: {
+    borderRadius: '100px',
+    scale: 1,
+  },
+}
+<StyledBox
+  variants={boxVariants}
+  whileHover="hover" // 마우스 오버 시
+  whileTap="click" // 마우스 클릭 시
+></StyledBox>
+```
+
+- whileHover, whileTap 으로 마우스 이벤트 애니메이션을 만들 수 있다.
+
+## AnimatePresence
+
+- motion왜에 click 이벤트 시에 애니메이션을 유용하게 사용 할때 쓰이는 코드
+- 한가지 규칙은 꼭 visible 상태여야 함
+
+`components/Framer/Precence.tsx`
+
+```javascript
+import { motion, AnimatePresence } from 'framer-motion'
+const Precence = () => {
+  const [showing, setShowing] = useState(false)
+  const toggleShowing = () => setShowing(!showing)
+  const boxVariants = {
+    start: {
+      opacity: 0,
+      scale: 0,
+    },
+    visible: {
+      // 기존 모션과 다르게 visible이 추가 된다. 이 코드를 animate에 넣는다.
+      opacity: 1,
+      scale: 1,
+      rotateZ: 360,
+    },
+    end: {
+      // 이 부분은 false일때 들어가는 코드로 exit에 들어 간다.
+      opacity: 0,
+      scale: 0,
+      y: 50,
+    },
+  }
+  return (
+    <Wrapper>
+      <button onClick={toggleShowing}>Click me</button>
+      {/* motion이 이뤄나는 부분에 AnimatePresence로 감싸준다. */}
+      <AnimatePresence>
+        {showing ? (
+          <StyledBox
+            variants={boxVariants}
+            initial="start" // 최초
+            animate="visible" // true
+            exit="end" // false
+          />
+        ) : null}
+      </AnimatePresence>
+    </Wrapper>
+  )
+}
 ```
