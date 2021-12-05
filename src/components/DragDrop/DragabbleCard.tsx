@@ -1,17 +1,17 @@
-import { Draggable } from "react-beautiful-dnd";
-import styled from "styled-components";
-import React from "react";
+import { Draggable } from 'react-beautiful-dnd'
+import styled from 'styled-components'
+import React from 'react'
 
 const Card = styled.div`
   border-radius: 5px;
   padding: 10px;
   margin-bottom: 5px;
-  background-color: ${(props) => props.theme.cardColor};
-`;
+  background-color: white;
+`
 
 interface IDragabbleCardProps {
-  toDo: string;
-  index: number;
+  toDo: string
+  index: number
 }
 const DragabbleCard = ({ toDo, index }: IDragabbleCardProps) => {
   return (
@@ -27,6 +27,6 @@ const DragabbleCard = ({ toDo, index }: IDragabbleCardProps) => {
         </Card>
       )}
     </Draggable>
-  );
-};
-export default React.memo(DragabbleCard);
+  )
+}
+export default React.memo(DragabbleCard)

@@ -1,24 +1,8 @@
-const BASE_URL = `https://api.coinpaprika.com/v1`
+const API_KEY = 'bc6e27d4ea1e78e704fee1d9c5ff78d9'
+const BASE_PATH = 'https://api.themoviedb.org/3'
 
-export async function fetchCoins() {
-  return fetch(`${BASE_URL}/coins`).then((response) => response.json())
-}
-
-export async function fetchCoinInfo(coinId: string) {
-  return fetch(`${BASE_URL}/coins/${coinId}`).then((response) =>
-    response.json(),
-  )
-}
-export async function fetchCoinTickers(coinId: string) {
-  return fetch(`${BASE_URL}/tickers/${coinId}`).then((response) =>
-    response.json(),
-  )
-}
-
-export async function fetchCoinHistory(coinId: string) {
-  const endDate = Math.floor(Date.now() / 1000)
-  const startDate = endDate - 60 * 60 * 24 * 7 * 2
+export function getMovies() {
   return fetch(
-    `${BASE_URL}/coins/${coinId}/ohlcv/historical?start=${startDate}&end=${endDate}`,
+    `${BASE_PATH}/movie/now_playing?api_key=${API_KEY}`,
   ).then((response) => response.json())
 }

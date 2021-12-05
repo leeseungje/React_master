@@ -1,23 +1,23 @@
-import { Droppable } from "react-beautiful-dnd";
-import styled from "styled-components";
-import DragabbleCard from "./DragabbleCard";
+import { Droppable } from 'react-beautiful-dnd'
+import styled from 'styled-components'
+import DragabbleCard from './DragabbleCard'
 
 const Wrapper = styled.div`
   padding: 20px 10px;
   padding-top: 30px;
-  background-color: ${(props) => props.theme.boardColor};
+  background-color: white;
   border-radius: 5px;
   min-height: 200px;
-`;
+`
 const Title = styled.h1`
   text-align: center;
   font-weight: bold;
   font-size: 20px;
-`;
+`
 
 interface IBoardProps {
-  boardId: string;
-  toDos: string[];
+  boardId: string
+  toDos: string[]
 }
 
 const Board = ({ toDos, boardId }: IBoardProps) => {
@@ -27,7 +27,7 @@ const Board = ({ toDos, boardId }: IBoardProps) => {
       <Droppable droppableId={boardId}>
         {(magic) => (
           <div
-            style={{ backgroundColor: "red" }}
+            style={{ backgroundColor: 'red' }}
             ref={magic.innerRef}
             {...magic.droppableProps}
           >
@@ -40,7 +40,7 @@ const Board = ({ toDos, boardId }: IBoardProps) => {
         )}
       </Droppable>
     </Wrapper>
-  );
-};
+  )
+}
 
-export default Board;
+export default Board
