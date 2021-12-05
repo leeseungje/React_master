@@ -218,6 +218,17 @@ const { isLoading, data: dataSource } = useQuery<IHistorical[]>(
   )
 ```
 
+## URLSearchParams()
+
+뒤의 파라미터 값을 좀더 세분화 시킬수 있는 방식
+
+```javascript
+const search = new URLSearchParams('?keyword=dune&region=kr')
+
+console.log(search.get('region')) // dune
+console.log(search.get('keyword')) // kr
+```
+
 ## Recoil
 
 부모를 통해서 props를 받고 state값을 변경하기에 너무 불필요한 요소가 너무 많이 들어가서
