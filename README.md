@@ -748,3 +748,106 @@ const Precence = () => {
   )
 }
 ```
+
+## es6
+
+### Object Destructuring
+
+기존 es5에서 오브젝트에 값을 가져 올때 일일이 지정 했다면 ES6에선 하나로 저장해서 한번에 부를 수 있다.
+
+```javascript
+const human = {
+  name: 'Lee',
+  lastName: 'Seungje',
+  nation: 'Korean',
+  favFood: {
+    breakFast: 'Sang',
+    lunch: 'Doncas',
+    dinner: 'Sang + Doncas',
+  },
+}
+
+//기존 ES5
+// const name = human.name;
+// const lastName = human.lastName;
+// const nation = human.nation;
+
+// ES6
+const {
+  name,
+  lastName,
+  nation: difName,
+  favFood: { breakFast, lunch, dinner },
+} = human // nation의 이름을 difName으로 바꿀 수 있다.
+console.log(name, lastName, difName, breakFast, lunch, dinner) // Lee Seungje Korean 음식 등등 다 나옴
+```
+
+### Spread Operator
+
+`...`을 이용해서 흩어져 있던 배열과 오브젝트를 합쳐주는 방식
+
+```javascript
+const days = ['월요일', '화요일', '수요일']
+const otherDays = ['목요일', '금요일', '토요일']
+
+// ES5
+// let allDays = [days + otherDays] //
+// console.log(allDays) [[월요일,~수요일], [목요일, ~ 토요일]] 배열이 따로 변환 된다.
+
+// ES6
+console.log([...days, ...otherDays, '일요일']) // [월요일 ~ 일요일] 한 배열에 담긴다.
+
+// 오브젝트에도 사용 가능
+const one = {
+  first: 'hi',
+  second: 'hello',
+}
+const two = {
+  third: 'bye',
+}
+
+const two = { ...one, ...two } // {first: hi, second: hello, third: bye}
+```
+
+### Array.prototype.filter()
+
+map과 방식은 유사하지만 조건문을 걸어서 요구하는 식만 값을 받아오는 메소드
+
+```javascript
+const words = ['spray', 'limit', 'elite', 'exuberant', 'destruction', 'present']
+
+const result = words.filter((word) => word.length > 6) // 6글자 보다 높은 글자만 return
+
+console.log(result)
+// expected output: Array ["exuberant", "destruction", "present"]
+```
+
+### Array.prototype.forEach()
+
+주어진 함수를 배열 요소 각각에 대해 실행합니다.
+
+```javascript
+const array1 = ['a', 'b', 'c']
+
+array1.forEach((element) => console.log(element))
+
+// expected output: "a"
+// expected output: "b"
+// expected output: "c"
+```
+
+### includes
+
+배열안에 필요한 요소가 있는지 찾는 메소드
+
+```javascript
+let greetings = ['hi', 'howdy', 'suup']
+
+if (!greetings.includes('hello')) {
+  greetings.push('hello') // 배열에서 맨뒤에 추가 하는 기능
+}
+console.log(greetings) // ['hi', 'howdy', 'suup', 'hello']
+```
+
+[Array Method](https://developer.mozilla.org/ko/docs/Web/JavaScript/Reference/Global_Objects/Array)
+`엄청 많다...ㅠ`
