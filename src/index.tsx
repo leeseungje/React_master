@@ -1,10 +1,11 @@
-import React from 'react'
-import ReactDOM from 'react-dom'
-import App from './App'
-import { RecoilRoot } from 'recoil'
-import { createGlobalStyle, ThemeProvider } from 'styled-components'
-import { theme } from './theme'
-import { QueryClient, QueryClientProvider } from 'react-query'
+import React from "react";
+import ReactDOM from "react-dom";
+import App from "./App";
+import { RecoilRoot } from "recoil";
+import { createGlobalStyle, ThemeProvider } from "styled-components";
+import { theme } from "./theme";
+import { QueryClient, QueryClientProvider } from "react-query";
+import { BrowserRouter } from "react-router-dom";
 
 const GlobalStyle = createGlobalStyle`
 @import url('https://fonts.googleapis.com/css2?family=Source+Sans+Pro:wght@300;400&display=swap');
@@ -67,9 +68,9 @@ body {
 a {
   text-decoration:none;
   color: inherit;
-}`
+}`;
 
-const client = new QueryClient()
+const client = new QueryClient();
 
 ReactDOM.render(
   <React.StrictMode>
@@ -77,10 +78,12 @@ ReactDOM.render(
       <QueryClientProvider client={client}>
         <ThemeProvider theme={theme}>
           <GlobalStyle />
-          <App />
+          <BrowserRouter>
+            <App />
+          </BrowserRouter>
         </ThemeProvider>
       </QueryClientProvider>
     </RecoilRoot>
   </React.StrictMode>,
-  document.getElementById('root'),
-)
+  document.getElementById("root")
+);
